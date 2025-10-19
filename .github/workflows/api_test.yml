@@ -1,0 +1,26 @@
+name: API Test
+
+on:
+  push:
+    branches: [ main ]
+  schedule:
+    - cron: "0 * * * *"  # لتشغيله كل ساعة (اختياري)
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Run API Test
+        run: python test_api.py
